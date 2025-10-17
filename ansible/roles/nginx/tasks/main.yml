@@ -1,0 +1,30 @@
+---
+- name: Remove default site
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  become: yes
+
+- name: Deploy Flask Nginx config
+  template:
+    src: flaskapp.conf.j2
+    dest: /etc/nginx/sites-available/{{ app_name }}.conf
+  become: yes
+  notify:
+    - Reload nginx
+
+- name: Enable our site
+  file:
+    src: /etc/nginx/sites-available/{{ app_name }}.conf
+    dest: /etc/nginx/sites-enabled/{{ app_name }}.conf
+    state: link
+  become: yes
+  notify:
+    - Reload nginx
+
+- name: Ensure nginx is running
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+  become: yes

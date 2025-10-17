@@ -1,0 +1,7 @@
+- name: Deploy Flask + NGINX
+  hosts: all
+  become: yes
+  roles:
+    - common
+    - app
+    - nginx
