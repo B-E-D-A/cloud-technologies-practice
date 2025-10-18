@@ -1,1 +1,1 @@
-# cloud-technologies-practice
+# Практическая работа №7
