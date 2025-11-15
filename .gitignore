@@ -1,0 +1,7 @@
+terraform.tfstate
+terraform.tfstate.backup
+*.tfvars
+.secret
+*.pem
+*.key
+terraform.tfvars

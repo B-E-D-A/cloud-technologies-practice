@@ -1,0 +1,16 @@
+#cloud-config
+users:
+  - name: ubuntu
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: sudo
+    shell: /bin/bash
+
+write_files:
+  - path: /etc/banner
+    permissions: '0644'
+    content: |
+      Project: Cloud Practice 8
+      Powered by Terraform
+
+runcmd:
+  - echo "Cloud-init for Cloud Practice 8 executed"
