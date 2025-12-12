@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-backend
+  labels:
+    app: backend
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: "{{ .Values.backend.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy | default "IfNotPresent" }}
+          ports:
+              - containerPort: {{ .Values.backend.service.port }}
+{{- if .Values.backend.livenessProbe }}
+          livenessProbe:
+{{ toYaml .Values.backend.livenessProbe | indent 12 }}
+{{- end }}
+{{- if .Values.backend.readinessProbe }}
+          readinessProbe:
+{{ toYaml .Values.backend.readinessProbe | indent 12 }}
+{{- end }}
