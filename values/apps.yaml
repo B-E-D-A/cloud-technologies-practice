@@ -1,0 +1,6 @@
+spec:
+  source:
+    repoURL: https://cloud-e73.gitlab.yandexcloud.net/yc-courses/infra.git
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
